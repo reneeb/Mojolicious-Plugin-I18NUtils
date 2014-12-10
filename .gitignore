@@ -1,0 +1,3 @@
+*.swp
+Mojolicious-Plugin*
+.build*
