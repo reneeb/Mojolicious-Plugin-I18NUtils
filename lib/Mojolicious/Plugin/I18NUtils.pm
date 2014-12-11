@@ -8,6 +8,7 @@ use warnings;
 use Time::Piece;
 
 use parent 'Mojolicious::Plugin';
+use feature 'state';
 
 our $VERSION = '0.02';
 
