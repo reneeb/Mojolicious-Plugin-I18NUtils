@@ -4,7 +4,7 @@ package Mojolicious::Plugin::I18NUtils;
 use Mojo::Base 'Mojolicious::Plugin';
 use Time::Piece;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub register {
     my ($self, $app, $config) = @_;

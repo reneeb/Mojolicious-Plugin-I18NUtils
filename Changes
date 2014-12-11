@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.05 2014-12-11
+
+  [IMPROVEMENTS]
+  * use Mojo::Base instead of "parent" (thanks Красимир Беров - kberov)
+
 0.04 2014-12-11
 
   [MISC]
