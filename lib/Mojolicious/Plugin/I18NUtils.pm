@@ -10,7 +10,7 @@ use Time::Piece;
 use parent 'Mojolicious::Plugin';
 use feature 'state';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub register {
     my ($self, $app, $config) = @_;

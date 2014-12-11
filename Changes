@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.03 2014-12-11
+
+  [IMPROVEMENTS]
+  * gain more speed thanks to state variables (thanks Красимир Беров - kberov)
+
 0.02 2014-12-10
 
   [DOCUMENTATION]
