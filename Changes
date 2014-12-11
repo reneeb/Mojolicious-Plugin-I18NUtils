@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.04 2014-12-11
+
+  [MISC]
+  * re-release as 0.03 included too many files
+
 0.03 2014-12-11
 
   [IMPROVEMENTS]
