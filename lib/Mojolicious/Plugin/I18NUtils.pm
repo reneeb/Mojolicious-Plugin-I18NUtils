@@ -1,14 +1,8 @@
 package Mojolicious::Plugin::I18NUtils;
 
 # ABSTRACT: provide some helper functions for I18N
-
-use strict;
-use warnings;
-
+use Mojo::Base 'Mojolicious::Plugin';
 use Time::Piece;
-
-use parent 'Mojolicious::Plugin';
-use feature 'state';
 
 our $VERSION = '0.04';
 
