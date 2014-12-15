@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.06 2014-12-15
+
+  [IMPROVEMENTS]
+  * add helper 'currency' to format currency strings (using CLDR::Number)
+
 0.05 2014-12-11
 
   [IMPROVEMENTS]
