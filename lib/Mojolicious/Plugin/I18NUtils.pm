@@ -3,6 +3,7 @@ package Mojolicious::Plugin::I18NUtils;
 # ABSTRACT: provide some helper functions for I18N
 use Mojo::Base 'Mojolicious::Plugin';
 use Time::Piece;
+use CLDR::Number;
 
 our $VERSION = '0.05';
 
@@ -11,6 +12,8 @@ sub register {
 
     $config //= {};
     my $parse_format = $config->{format} // '%Y-%m-%d %H:%M:%S';
+
+    my %objects;
 
     $app->helper( datetime_loc => sub {
         my $c = shift;
@@ -30,6 +33,16 @@ sub register {
         my $formatted_date = $self->_translate( $date, $parse_format, $output_format );
 
         return $formatted_date;
+    } );
+
+    $app->helper( currency => sub {
+        my ($c, $number, $locale, $currency) = @_;
+
+        $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
+        $objects{cur}->{$locale}  ||= $objects{cldr}->{$locale}->currency_formatter( currency_code => $currency );
+
+        my $formatted = $objects{cur}->{$locale}->format( $number );
+        return $formatted;
     } );
 }
 
