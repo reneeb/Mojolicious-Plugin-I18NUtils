@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.07 2014-12-16
+
+  [IMPROVEMENTS]
+  * add helper 'decimal' to format numbers (using CLDR::Number)
+
 0.06 2014-12-15
 
   [IMPROVEMENTS]
