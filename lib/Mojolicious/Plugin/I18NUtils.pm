@@ -44,6 +44,16 @@ sub register {
         my $formatted = $objects{cur}->{$locale}->format( $number );
         return $formatted;
     } );
+
+    $app->helper( decimal => sub {
+        my ($c, $number, $locale) = @_;
+
+        $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
+        $objects{dec}->{$locale}  ||= $objects{cldr}->{$locale}->decimal_formatter;
+
+        my $formatted = $objects{dec}->{$locale}->format( $number );
+        return $formatted;
+    } );
 }
 
 sub _translate {
