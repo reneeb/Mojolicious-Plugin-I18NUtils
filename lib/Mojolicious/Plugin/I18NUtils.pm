@@ -54,6 +54,16 @@ sub register {
         my $formatted = $objects{dec}->{$locale}->format( $number );
         return $formatted;
     } );
+
+    $app->helper( range => sub {
+        my ($c, $lower, $upper, $locale) = @_;
+
+        $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
+        $objects{dec}->{$locale}  ||= $objects{cldr}->{$locale}->decimal_formatter;
+
+        my $formatted = $objects{dec}->{$locale}->range( $lower, $upper );
+        return $formatted;
+    } );
 }
 
 sub _translate {
@@ -181,6 +191,8 @@ sub _date_short {
 
 1;
 
+=encoding utf-8
+
 =head1 SYNOPSIS
 
 In your C<startup>:
@@ -232,6 +244,44 @@ Same as C<datetime_loc>, but omits the time
 will return
 
  10.12.2014
+
+=head2 currency
+
+If you need to handle prices, the helper C<currency> might help you
+
+  <%= currency(1111.99, 'EUR', 'ar') %>
+  <%= currency(1111.99, 'EUR', 'de') %>
+  <%= currency(1111.99, 'EUR', 'en') %>
+
+will return
+
+  € ١٬١١١٫٩٩
+  1.111,99 €
+  €1,111.99 
+
+=head2 decimal
+
+  <%= decimal( 2000, 'ar' ) %>
+  <%= decimal( 2000, 'de' ) %>
+  <%= decimal( 2000, 'en' ) %>
+
+will return
+
+  ٢٬٠٠٠
+  2.000
+  2,000
+
+=head2 range
+
+  <%= range(1, 2000, 'ar' ) %>
+  <%= range(1, 2000, 'de' ) %>
+  <%= range(1, 2000, 'en' ) %>
+
+will return
+
+  ١–٢٬٠٠٠
+  1–2.000
+  1–2,000
 
 =head1 METHODS
 
