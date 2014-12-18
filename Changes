@@ -1,6 +1,14 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.08 2014-12-18
+
+  [IMPROVEMENTS]
+  * add helper 'range'
+
+  [DOCUMENTATION]
+  * document currency, decimal, range
+
 0.07 2014-12-16
 
   [IMPROVEMENTS]
