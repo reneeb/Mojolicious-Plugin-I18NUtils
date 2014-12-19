@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.09 2014-12-19
+
+  [IMPROVEMENTS]
+  * add helper 'at_least'
+
 0.08 2014-12-18
 
   [IMPROVEMENTS]
