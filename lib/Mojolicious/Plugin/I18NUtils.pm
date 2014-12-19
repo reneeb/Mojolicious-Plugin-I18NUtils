@@ -64,6 +64,16 @@ sub register {
         my $formatted = $objects{dec}->{$locale}->range( $lower, $upper );
         return $formatted;
     } );
+
+    $app->helper( at_least => sub {
+        my ($c, $number, $locale) = @_;
+
+        $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
+        $objects{dec}->{$locale}  ||= $objects{cldr}->{$locale}->decimal_formatter;
+
+        my $formatted = $objects{dec}->{$locale}->at_least( $number );
+        return $formatted;
+    } );
 }
 
 sub _translate {
@@ -282,6 +292,18 @@ will return
   ١–٢٬٠٠٠
   1–2.000
   1–2,000
+
+=head2 at_least
+
+  <%= at_least( 2000, 'ar' ) %>
+  <%= at_least( 2000, 'de' ) %>
+  <%= at_least( 2000, 'en' ) %>
+
+will return
+
+  ٢٬٠٠٠
+  2.000
+  2,000
 
 =head1 METHODS
 
