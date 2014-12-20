@@ -36,12 +36,20 @@ sub register {
     } );
 
     $app->helper( currency => sub {
-        my ($c, $number, $locale, $currency) = @_;
+        my ($c, $number, $locale, $currency, $opts) = @_;
 
         $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
         $objects{cur}->{$locale}  ||= $objects{cldr}->{$locale}->currency_formatter( currency_code => $currency );
 
-        my $formatted = $objects{cur}->{$locale}->format( $number );
+        my $cur_object = $objects{cur}->{$locale};
+
+        if ( $opts && $opts->{cash} ) {
+            $cur_object->cash(1);
+        }
+
+        my $formatted = $cur_object->format( $number );
+        $cur_object->cash(0);
+
         return $formatted;
     } );
 
