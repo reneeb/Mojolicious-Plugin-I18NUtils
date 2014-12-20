@@ -5,7 +5,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 use Time::Piece;
 use CLDR::Number;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 sub register {
     my ($self, $app, $config) = @_;

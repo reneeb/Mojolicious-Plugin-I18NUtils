@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 =========================================
 
+0.10 2014-12-20
+
+  [IMPROVEMENTS]
+  * accept reference to options for 'currency' to be able to format for 'cash'
+
 0.09 2014-12-19
 
   [IMPROVEMENTS]
