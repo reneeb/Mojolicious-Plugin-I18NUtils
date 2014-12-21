@@ -1,5 +1,10 @@
 History for Mojolicious::Plugin::I18NUtils
-=========================================
+==========================================
+
+0.11 2014-12-21
+
+  [BUGFIX]
+  * in date and datetime helpers the language setting was case sensitive. Now ar_sa and ar_SA returns the same value
 
 0.10 2014-12-20
 
