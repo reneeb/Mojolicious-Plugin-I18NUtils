@@ -1,6 +1,9 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+  [IMPROVEMENTS]
+  * added helper: format_locale
+
 0.11 2014-12-21
 
   [BUGFIX]

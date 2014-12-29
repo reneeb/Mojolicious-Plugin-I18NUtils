@@ -5,6 +5,8 @@ use Mojo::Base 'Mojolicious::Plugin';
 use Time::Piece;
 use CLDR::Number;
 
+use Mojolicious::Plugin::I18NUtils::Locale;
+
 our $VERSION = '0.11';
 
 sub register {
@@ -82,6 +84,12 @@ sub register {
         my $formatted = $objects{dec}->{$locale}->at_least( $number );
         return $formatted;
     } );
+
+    $app->helper( locale_obj => sub {
+        my ( $c, $locale) = @_;
+
+        return Mojolicious::Plugin::I18NUtils::Locale->new( locale => $locale );
+    });
 }
 
 sub _translate {
