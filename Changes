@@ -1,8 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+0.12 2014-12-29
+
   [IMPROVEMENTS]
-  * added helper: format_locale
+  * added helper: locale_obj
+  * added class for locale strings
 
 0.11 2014-12-21
 
