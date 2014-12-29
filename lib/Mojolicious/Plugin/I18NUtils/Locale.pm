@@ -1,6 +1,10 @@
 package Mojolicious::Plugin::I18NUtils::Locale;
 
+# ABSTRACT: class that represents a locale string
+
 use Mojo::Base qw(-base);
+
+our $VERSION = 0.01;
 
 has 'locale' => 'en';
 has 'lang'   => '';

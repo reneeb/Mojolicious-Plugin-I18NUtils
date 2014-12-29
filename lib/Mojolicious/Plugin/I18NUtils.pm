@@ -7,7 +7,7 @@ use CLDR::Number;
 
 use Mojolicious::Plugin::I18NUtils::Locale;
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 sub register {
     my ($self, $app, $config) = @_;
