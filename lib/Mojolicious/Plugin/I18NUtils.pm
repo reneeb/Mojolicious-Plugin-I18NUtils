@@ -7,7 +7,7 @@ use CLDR::Number;
 
 use Mojolicious::Plugin::I18NUtils::Locale;
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 sub register {
     my ($self, $app, $config) = @_;
@@ -33,6 +33,20 @@ sub register {
 
         my $output_format  = $self->_date_short( $lang );
         my $formatted_date = $self->_translate( $date, $parse_format, $output_format );
+
+        return $formatted_date;
+    } );
+
+    $app->helper( date_from_to => sub {
+        my $c = shift;
+        my ($date, $from, $to) = @_;
+
+        my $in_format  = $self->_date_short( $from );
+        my $out_format = $self->_date_short( $to );
+
+        $out_format = '%Y-%m-%d' if lc $to eq 'iso';
+
+        my $formatted_date = $self->_translate( $date, $in_format, $out_format );
 
         return $formatted_date;
     } );
@@ -99,8 +113,13 @@ sub _translate {
         $date .= ' 00:00:00';
     }
 
-    my $date_obj = Time::Piece->strptime( $date, $in );
-    my $out_date = $date_obj->strftime( $out );
+    my $out_date;
+
+    {
+        local $SIG{__WARN__} = sub {};
+        my $date_obj = Time::Piece->strptime( $date, $in );
+        $out_date    = $date_obj->strftime( $out );
+    }
 
     return $out_date;
 }

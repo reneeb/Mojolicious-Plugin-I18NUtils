@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+0.13 2014-12-31
+
+  [IMPROVEMENTS]
+  * add date_from_to to convert from one format to another one (e.g. format %d.%m.%Y to %Y-%m-%d)
+
 0.12 2014-12-29
 
   [IMPROVEMENTS]
