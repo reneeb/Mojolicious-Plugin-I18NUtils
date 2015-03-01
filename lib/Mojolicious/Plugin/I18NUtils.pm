@@ -7,7 +7,7 @@ use CLDR::Number;
 
 use Mojolicious::Plugin::I18NUtils::Locale;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 sub register {
     my ($self, $app, $config) = @_;
@@ -21,6 +21,8 @@ sub register {
         my $c = shift;
         my ($date, $lang) = @_;
 
+        return '' if !defined $date;
+
         my $output_format  = $self->_date_long( $lang );
         my $formatted_date = $self->_translate( $date, $parse_format, $output_format );
 
@@ -30,6 +32,8 @@ sub register {
     $app->helper( date_loc => sub {
         my $c = shift;
         my ($date, $lang) = @_;
+
+        return '' if !defined $date;
 
         my $output_format  = $self->_date_short( $lang );
         my $formatted_date = $self->_translate( $date, $parse_format, $output_format );
@@ -117,8 +121,12 @@ sub _translate {
 
     {
         local $SIG{__WARN__} = sub {};
-        my $date_obj = Time::Piece->strptime( $date, $in );
-        $out_date    = $date_obj->strftime( $out );
+
+        eval {
+            my $date_obj = Time::Piece->strptime( $date, $in );
+            $out_date    = $date_obj->strftime( $out );
+            1;
+        } or $out_date = '';
     }
 
     return $out_date;
@@ -127,7 +135,7 @@ sub _translate {
 sub _date_long {
     my ($self, $lang) = @_;
 
-    return "%Y.%m.%d %H:%M:%S" if !$lang;
+    return "%d/%m/%Y %H:%M:%S" if !$lang;
 
     $lang = lc $lang;
     $lang =~ s/-/_/g;
@@ -179,13 +187,13 @@ sub _date_long {
         zh_tw   => '%Y.%m.%d %H:%M:%S',
     };
 
-    return $formats->{$lang} // '%Y.%m.%d %H:%M:%S';
+    return $formats->{$lang} // '%d/%m/%Y %H:%M:%S';
 }
 
 sub _date_short {
     my ($self, $lang) = @_;
 
-    return "%Y.%m.%d" if !$lang;
+    return "%d/%m/%Y" if !$lang;
 
     $lang = lc $lang;
     $lang =~ s/-/_/g;
@@ -237,7 +245,7 @@ sub _date_short {
         zh_tw   => '%Y.%m.%d',
     };
 
-    return $formats->{$lang} // '%Y.%m.%d';
+    return $formats->{$lang} // '%d/%m/%Y';
 }
 
 1;
