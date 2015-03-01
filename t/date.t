@@ -20,6 +20,14 @@ any '/'      => sub {
     $self->render( text => $self->date_loc( $date, $lang ) );
 };
 
+any '/error'      => sub {
+    my $self = shift;
+
+    my $date = $self->param('date');
+
+    $self->render( text => $self->date_loc( $date, 'de' ) );
+};
+
 ## Webapp END
 
 my $t = Test::Mojo->new;
@@ -36,10 +44,17 @@ my %tests = (
     en_gb => '10/12/2014',
     es_co => '10/12/2014',
     zh_cn => '2014.12.10',
+    test  => '10/12/2014',
 );
 
 for my $lang ( sort keys %tests ) {
     $t->get_ok( "/?lang=$lang" )->status_is( 200 )->content_is( $tests{$lang}, "test language $lang" );
+}
+
+my @falses = ( '', undef, '0000-00-00 00:00:00','string');
+
+for my $date ( @falses ) {
+    $t->get_ok( "/error?date=" . ( $date || '' ) )->status_is( 200 )->content_is( '', "test error " . ( defined $date ? $date : '<undefined>' ) );
 }
 
 done_testing();

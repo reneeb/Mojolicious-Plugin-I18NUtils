@@ -1,6 +1,12 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+0.14 2015-03-01
+
+  [IMPROVEMENTS]
+  * use "%d/%m/%Y" as default format which is (kind of) more natural than "%Y.%m.%d".
+  * return '' for invalid dates
+
 0.13 2014-12-31
 
   [IMPROVEMENTS]
