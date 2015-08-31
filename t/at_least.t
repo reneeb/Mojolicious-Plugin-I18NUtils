@@ -3,6 +3,7 @@
 use Mojolicious::Lite;
 
 use utf8;
+use open qw( :encoding(UTF-8) :std );
 use Test::More;
 use Test::Mojo;
 
@@ -30,8 +31,8 @@ my %tests = (
     en_CA => '2,000+',
     en_GB => '2,000+',
     en    => '2,000+',
-    es    => "M\x{e1}s de 2\x{a0}000",
-    es_CO => "M\x{e1}s de 2.000",
+    es    => "M\x{e1}s de 2.000",
+    es_MX => "M\x{e1}s de 2,000",
     zh_CN => '2,000+',
     bn    => "\x{09e8}," . ( "\x{09e6}" x 3 ) . "+",
     ar    => "+\x{0662}" . "\x{066c}" . ( "\x{0660}" x 3 ),

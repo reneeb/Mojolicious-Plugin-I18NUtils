@@ -2,6 +2,8 @@
 
 use Mojolicious::Lite;
 
+use utf8;
+use open qw( :encoding(UTF-8) :std );
 use Test::More;
 use Test::Mojo;
 
@@ -30,7 +32,7 @@ my %tests = (
     en_GB => '10/12/2014 01:23:45',
     en    => '12/10/2014 01:23:45',
     es    => '10/12/2014 - 01:23:45',
-    es_CO => '10/12/2014 - 01:23:45',
+    es_MX => '10/12/2014 - 01:23:45',
     zh_CN => '2014.12.10 01:23:45',
 );
 
