@@ -2,6 +2,8 @@
 
 use Mojolicious::Lite;
 
+use utf8;
+use open qw( :encoding(UTF-8) :std );
 use Test::More;
 use Test::Mojo;
 
