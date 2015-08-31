@@ -33,7 +33,7 @@ my %tests = (
     en_GB => "CHF\x{a0}10.00",
     en    => "CHF\x{a0}10.00",
     es    => "10,00\x{a0}CHF",
-    es_CO => "CHF\x{a0}10,00",
+    es_MX => "CHF\x{a0}10.00",
     zh_CN => "CHF 10.00",
     de_CH => "CHF\x{a0}10.00",
 );
