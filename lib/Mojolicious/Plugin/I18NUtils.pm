@@ -350,9 +350,9 @@ will return
 
 will return
 
-  ٢٬٠٠٠
-  2.000
-  2,000
+  +٢٬٠٠٠
+  2.000+
+  2,000+
 
 =head1 METHODS
 
