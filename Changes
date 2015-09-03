@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+0.16 2015-09-03
+
+  [DOCUMENTATION]
+  * fix documentation of 'at_least' (thanks to Nova Patch)
+
 0.15 2015-08-31
 
   [BUGFIX]
