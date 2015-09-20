@@ -34,7 +34,7 @@ my %tests = (
     en    => '€9.99',
     es    => "9,99\x{a0}€",
     es_MX => "EUR\x{a0}9.99",
-    zh_CN => '€ 9.99',
+    zh_CN => '€9.99',
 );
 
 for my $lang ( sort keys %tests ) {
