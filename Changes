@@ -1,6 +1,11 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+0.16 2015-09-22
+
+  [BUGFIX]
+  * fix one test that was broken by the new CLDR v28 data, as provided in CLDR::Number v0.13.  (thanks to Nova Patch)
+
 0.16 2015-09-03
 
   [DOCUMENTATION]
