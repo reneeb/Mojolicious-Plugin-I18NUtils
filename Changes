@@ -1,6 +1,13 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+0.18 2015-09-24
+
+  [IMPROVEMENTS]
+  * Need CLDR::Number 0.16 now (thanks to Nova Patch)
+  * fixed tests for new CLDR::Number version (thanks to Nova Patch)
+  * added more tests for 'at_least'
+
 0.17 2015-09-22
 
   [BUGFIX]
