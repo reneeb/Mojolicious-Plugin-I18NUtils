@@ -4,6 +4,7 @@ package Mojolicious::Plugin::I18NUtils;
 use Mojo::Base 'Mojolicious::Plugin';
 use Time::Piece;
 use CLDR::Number;
+use HTTP::AcceptLanguage;
 
 use Mojolicious::Plugin::I18NUtils::Locale;
 
@@ -17,9 +18,18 @@ sub register {
 
     my %objects;
 
+    $app->helper( browser_languages => sub {
+        my $c = shift;
+
+        my $lang = HTTP::AcceptLanguage->new( $c->req->headers->accept_language );
+        return $lang->languages;
+    });
+
     $app->helper( datetime_loc => sub {
         my $c = shift;
         my ($date, $lang) = @_;
+
+        $lang //= ($c->browser_languages)[0];
 
         return '' if !defined $date;
 
@@ -32,6 +42,8 @@ sub register {
     $app->helper( date_loc => sub {
         my $c = shift;
         my ($date, $lang) = @_;
+
+        $lang //= ($c->browser_languages)[0];
 
         return '' if !defined $date;
 
@@ -58,6 +70,8 @@ sub register {
     $app->helper( currency => sub {
         my ($c, $number, $locale, $currency, $opts) = @_;
 
+        $locale //= ($c->browser_languages)[0];
+
         $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
         $objects{cur}->{$locale}  ||= $objects{cldr}->{$locale}->currency_formatter( currency_code => $currency );
 
@@ -76,6 +90,8 @@ sub register {
     $app->helper( decimal => sub {
         my ($c, $number, $locale) = @_;
 
+        $locale //= ($c->browser_languages)[0];
+
         $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
         $objects{dec}->{$locale}  ||= $objects{cldr}->{$locale}->decimal_formatter;
 
@@ -85,6 +101,8 @@ sub register {
 
     $app->helper( range => sub {
         my ($c, $lower, $upper, $locale) = @_;
+
+        $locale //= ($c->browser_languages)[0];
 
         $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
         $objects{dec}->{$locale}  ||= $objects{cldr}->{$locale}->decimal_formatter;
@@ -96,6 +114,8 @@ sub register {
     $app->helper( at_least => sub {
         my ($c, $number, $locale) = @_;
 
+        $locale //= ($c->browser_languages)[0];
+
         $objects{cldr}->{$locale} ||= CLDR::Number->new( locale => $locale );
         $objects{dec}->{$locale}  ||= $objects{cldr}->{$locale}->decimal_formatter;
 
@@ -105,6 +125,8 @@ sub register {
 
     $app->helper( locale_obj => sub {
         my ( $c, $locale) = @_;
+
+        $locale //= ($c->browser_languages)[0];
 
         return Mojolicious::Plugin::I18NUtils::Locale->new( locale => $locale );
     });
@@ -282,7 +304,25 @@ You can add the plugin this way
 
 =head1 HELPERS
 
-This plugin adds two helper methods to your web application:
+This plugin adds those helper methods to your web application:
+
+=head2 browser_languages
+
+Return a list of languages defined in the I<Accept-Language> header.
+
+  my @languages = $c->browser_languages;
+
+or
+
+  your browser accepts those languages: <%= join ', ', browser_languages() %>
+
+Samples:
+
+  Accept-Language: en-ca,en;q=0.8,en-us;q=0.6,de-de;q=0.4,de;q=0.2
+
+returns
+
+  your browser accepts those languages: en-ca, en, en-us, de-de, de
 
 =head2 datetime_loc
 
