@@ -334,11 +334,29 @@ will return
 
  10.12.2014 11:12:13
 
+If you omit the language it will be retrieved from Accept-Language header
+
+ <%= datetime_loc('2014-12-10 11:12:13') %>
+ # Accept-Language: de, en;q=0.8
+
+will return
+
+ 10.12.2014 11:12:13
+
 =head2 date_loc
 
 Same as C<datetime_loc>, but omits the time
 
  <%= date_loc('2014-12-10 11:12:13', 'de') %>
+
+will return
+
+ 10.12.2014
+
+If you omit the language it will be retrieved from Accept-Language header
+
+ <%= date_loc('2014-12-10 11:12:13') %>
+ # Accept-Language: de, en;q=0.8
 
 will return
 
@@ -358,6 +376,15 @@ will return
   1.111,99 €
   €1,111.99 
 
+If you omit the language it will be retrieved from Accept-Language header
+
+ <%= currency(1111.99, 'EUR') %>
+ # Accept-Language: de, en;q=0.8
+
+will return
+
+ 1.111,99 €
+
 =head2 decimal
 
   <%= decimal( 2000, 'ar' ) %>
@@ -369,6 +396,15 @@ will return
   ٢٬٠٠٠
   2.000
   2,000
+
+If you omit the language it will be retrieved from Accept-Language header
+
+ <%= decimal( 2000 ) %>
+ # Accept-Language: de, en;q=0.8
+
+will return
+
+ 2.000
 
 =head2 range
 
@@ -382,6 +418,15 @@ will return
   1–2.000
   1–2,000
 
+If you omit the language it will be retrieved from Accept-Language header
+
+ <%= range( 1, 2000 ) %>
+ # Accept-Language: de, en;q=0.8
+
+will return
+
+  1–2.000
+
 =head2 at_least
 
   <%= at_least( 2000, 'ar' ) %>
@@ -393,6 +438,15 @@ will return
   +٢٬٠٠٠
   2.000+
   2,000+
+
+If you omit the language it will be retrieved from Accept-Language header
+
+ <%= at_least( 2000 ) %>
+ # Accept-Language: de, en;q=0.8
+
+will return
+
+  2.000+
 
 =head1 METHODS
 
