@@ -8,7 +8,7 @@ use HTTP::AcceptLanguage;
 
 use Mojolicious::Plugin::I18NUtils::Locale;
 
-our $VERSION = '0.18';
+our $VERSION = '0.19';
 
 sub register {
     my ($self, $app, $config) = @_;
