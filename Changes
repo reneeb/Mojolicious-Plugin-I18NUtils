@@ -1,6 +1,13 @@
 History for Mojolicious::Plugin::I18NUtils
 ==========================================
 
+0.19 2015-11-17
+
+  [IMPROVEMENTS]
+  * add browser_languages to get the languages defined in Accept-Language header
+  * if locale/language is omitted in the method calls, it gets the language via browser_languages
+  * added tests for new behaviour
+
 0.18 2015-09-24
 
   [IMPROVEMENTS]
