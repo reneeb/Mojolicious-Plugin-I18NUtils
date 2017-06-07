@@ -366,9 +366,9 @@ will return
 
 If you need to handle prices, the helper C<currency> might help you
 
-  <%= currency(1111.99, 'EUR', 'ar') %>
-  <%= currency(1111.99, 'EUR', 'de') %>
-  <%= currency(1111.99, 'EUR', 'en') %>
+  <%= currency(1111.99, 'ar', 'EUR') %>
+  <%= currency(1111.99, 'de', 'EUR') %>
+  <%= currency(1111.99, 'en', 'EUR') %>
 
 will return
 
