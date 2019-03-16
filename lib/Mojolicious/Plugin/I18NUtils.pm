@@ -13,7 +13,6 @@ our $VERSION = '0.20';
 sub register {
     my ($self, $app, $config) = @_;
 
-    $config //= {};
     my $parse_format = $config->{format} // '%Y-%m-%d %H:%M:%S';
 
     my %objects;
