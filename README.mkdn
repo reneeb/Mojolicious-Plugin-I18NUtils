@@ -1,0 +1,252 @@
+[![Build Status](https://travis-ci.org/reneeb/Mojolicious-Plugin-I18NUtils.svg?branch=master)](https://travis-ci.org/reneeb/Mojolicious-Plugin-I18NUtils)
+[![Kwalitee status](http://cpants.cpanauthors.org/dist/Mojolicious-Plugin-I18NUtils.png)](http://cpants.charsbar.org/dist/overview/Mojolicious-Plugin-I18NUtils)
+[![GitHub issues](https://img.shields.io/github/issues/reneeb/Mojolicious-Plugin-I18NUtils.svg)](https://github.com/reneeb/Mojolicious-Plugin-I18NUtils/issues)
+
+# NAME
+
+Mojolicious::Plugin::I18NUtils - provide some helper functions for I18N
+
+# VERSION
+
+version 0.20
+
+# SYNOPSIS
+
+In your `startup`:
+
+      sub startup {
+          my $self = shift;
+    
+          # do some Mojolicious stuff
+          $self->plugin( 'I18NUtils' );
+
+          # more Mojolicious stuff
+      }
+
+In your template:
+
+    <%= datetime_loc('2014-12-10', 'de') %>
+
+# CONFIGURE
+
+If you use a default format other than _%Y-%m-%d %H:%M:%S_ for dates in your
+application, you can set a format for the parser. E.g. if your dates look like
+
+    10.12.2014 12:34:56
+
+You can add the plugin this way
+
+    $self->plugin( I18NUtils => { format => '%d.%m.%Y %H:%M:%S' } );
+
+# HELPERS
+
+This plugin adds those helper methods to your web application:
+
+## browser\_languages
+
+Return a list of languages defined in the _Accept-Language_ header.
+
+    my @languages = $c->browser_languages;
+
+or
+
+    your browser accepts those languages: <%= join ', ', browser_languages() %>
+
+Samples:
+
+    Accept-Language: en-ca,en;q=0.8,en-us;q=0.6,de-de;q=0.4,de;q=0.2
+
+returns
+
+    your browser accepts those languages: en-ca, en, en-us, de-de, de
+
+## datetime\_loc
+
+This helper returns the givent date and time in the localized format.
+
+    <%= datetime_loc('2014-12-10 11:12:13', 'de') %>
+
+will return
+
+    10.12.2014 11:12:13
+
+If you omit the language it will be retrieved from Accept-Language header
+
+    <%= datetime_loc('2014-12-10 11:12:13') %>
+    # Accept-Language: de, en;q=0.8
+
+will return
+
+    10.12.2014 11:12:13
+
+## date\_loc
+
+Same as `datetime_loc`, but omits the time
+
+    <%= date_loc('2014-12-10 11:12:13', 'de') %>
+
+will return
+
+    10.12.2014
+
+If you omit the language it will be retrieved from Accept-Language header
+
+    <%= date_loc('2014-12-10 11:12:13') %>
+    # Accept-Language: de, en;q=0.8
+
+will return
+
+    10.12.2014
+
+## currency
+
+If you need to handle prices, the helper `currency` might help you
+
+    <%= currency(1111.99, 'ar', 'EUR') %>
+    <%= currency(1111.99, 'de', 'EUR') %>
+    <%= currency(1111.99, 'en', 'EUR') %>
+
+will return
+
+    € ١٬١١١٫٩٩
+    1.111,99 €
+    €1,111.99 
+
+If you omit the language it will be retrieved from Accept-Language header
+
+    <%= currency(1111.99, 'EUR') %>
+    # Accept-Language: de, en;q=0.8
+
+will return
+
+    1.111,99 €
+
+## decimal
+
+    <%= decimal( 2000, 'ar' ) %>
+    <%= decimal( 2000, 'de' ) %>
+    <%= decimal( 2000, 'en' ) %>
+
+will return
+
+    ٢٬٠٠٠
+    2.000
+    2,000
+
+If you omit the language it will be retrieved from Accept-Language header
+
+    <%= decimal( 2000 ) %>
+    # Accept-Language: de, en;q=0.8
+
+will return
+
+    2.000
+
+## range
+
+    <%= range(1, 2000, 'ar' ) %>
+    <%= range(1, 2000, 'de' ) %>
+    <%= range(1, 2000, 'en' ) %>
+
+will return
+
+    ١–٢٬٠٠٠
+    1–2.000
+    1–2,000
+
+If you omit the language it will be retrieved from Accept-Language header
+
+    <%= range( 1, 2000 ) %>
+    # Accept-Language: de, en;q=0.8
+
+will return
+
+    1–2.000
+
+## at\_least
+
+    <%= at_least( 2000, 'ar' ) %>
+    <%= at_least( 2000, 'de' ) %>
+    <%= at_least( 2000, 'en' ) %>
+
+will return
+
+    +٢٬٠٠٠
+    2.000+
+    2,000+
+
+If you omit the language it will be retrieved from Accept-Language header
+
+    <%= at_least( 2000 ) %>
+    # Accept-Language: de, en;q=0.8
+
+will return
+
+    2.000+
+
+# METHODS
+
+## register
+
+Called when registering the plugin.
+
+    # load plugin, alerts are dismissable by default
+    $self->plugin( 'I18NUtils' );
+
+
+
+# Development
+
+The distribution is contained in a Git repository, so simply clone the
+repository
+
+```
+$ git clone http://github.com/reneeb/Mojolicious-Plugin-I18NUtils.git
+```
+
+and change into the newly-created directory.
+
+```
+$ cd Mojolicious-Plugin-I18NUtils
+```
+
+The project uses [`Dist::Zilla`](https://metacpan.org/pod/Dist::Zilla) to
+build the distribution, hence this will need to be installed before
+continuing:
+
+```
+$ cpanm Dist::Zilla
+```
+
+To install the required prequisite packages, run the following set of
+commands:
+
+```
+$ dzil authordeps --missing | cpanm
+$ dzil listdeps --author --missing | cpanm
+```
+
+The distribution can be tested like so:
+
+```
+$ dzil test
+```
+
+To run the full set of tests (including author and release-process tests),
+add the `--author` and `--release` options:
+
+```
+$ dzil test --author --release
+```
+
+# AUTHOR
+
+Renee Baecker <reneeb@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2017 by Renee Baecker.
+
+This is free software, licensed under:
+
+    The Artistic License 2.0 (GPL Compatible)
