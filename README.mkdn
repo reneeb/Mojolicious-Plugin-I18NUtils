@@ -8,7 +8,7 @@ Mojolicious::Plugin::I18NUtils - provide some helper functions for I18N
 
 # VERSION
 
-version 0.20
+version 0.21
 
 # SYNOPSIS
 
