@@ -325,7 +325,7 @@ returns
 
 =head2 datetime_loc
 
-This helper returns the givent date and time in the localized format.
+This helper returns the given date and time in the localized format.
 
  <%= datetime_loc('2014-12-10 11:12:13', 'de') %>
 
@@ -453,6 +453,6 @@ will return
 
 Called when registering the plugin.
 
-    # load plugin, alerts are dismissable by default
+    # load plugin, alerts are dismissible by default
     $self->plugin( 'I18NUtils' );
 

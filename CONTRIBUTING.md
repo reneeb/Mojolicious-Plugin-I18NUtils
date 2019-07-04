@@ -22,7 +22,7 @@ continuing:
 $ cpanm Dist::Zilla
 ```
 
-To install the required prequisite packages, run the following set of
+To install the required prerequisite packages, run the following set of
 commands:
 
 ```
